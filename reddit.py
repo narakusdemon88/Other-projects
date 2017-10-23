@@ -18,5 +18,5 @@ while True:
     try: js = json.loads(str(data))
     except: js = None
 
-    plug = js['data']['children']['data'][0]['domain']
-    print plug
+    for i in js:
+        print i[1]
