@@ -18,5 +18,7 @@ while True:
     try: js = json.loads(str(data))
     except: js = None
 
-    for i in js:
-        print i[1]
+    # print json.dumps(js, indent=4)
+    contents = js['data']
+    for items in contents:
+        print items
