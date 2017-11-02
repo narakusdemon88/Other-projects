@@ -13,12 +13,15 @@ while True:
     print 'Retrieving /r/' + subreddit.capitalize()
     uh = urllib.urlopen(url)
     data = uh.read()
-    print 'Retrieved', len(data), 'characters'
 
     try: js = json.loads(str(data))
     except: js = None
 
     # print json.dumps(js, indent=4)
-    contents = js['data']
+    contents = js['data']['children']
     for items in contents:
-        print items
+        if items['data']['domain'] == 'youtube.com' :
+            youtubeUrl = items['data']['url']
+            videoTitle = items['data']['title']
+
+            print videoTitle, youtubeUrl
