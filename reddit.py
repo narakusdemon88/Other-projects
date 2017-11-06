@@ -2,15 +2,19 @@ import urllib
 import json
 from collections import defaultdict
 
-serviceurl = 'https://www.reddit.com/r/'
+serviceurl = 'https://www.reddit.com'
 
 while True:
     subreddit = raw_input('Enter subreddit: ')
     if len(subreddit) < 1 : subreddit = 'music';
+    if subreddit == 'mine' : 
+        url = serviceurl + '/user/narakusdemon88/m/music.json'
+        print 'Retrieving your music'
     if subreddit == 'end': break
 
-    url = serviceurl + subreddit + '.json'
-    print 'Retrieving /r/' + subreddit.capitalize()
+    if subreddit != 'mine': 
+        url = serviceurl + '/r/' + subreddit + '.json'
+        print 'Retrieving /r/' + subreddit.capitalize()
     uh = urllib.urlopen(url)
     data = uh.read()
 
