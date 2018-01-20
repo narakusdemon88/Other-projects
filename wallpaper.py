@@ -6,7 +6,9 @@ from collections import defaultdict
 serviceurl = 'https://www.reddit.com'
 
 while True:
-    subreddit = raw_input('Enter subreddit: ')
+    subreddit = raw_input('What kind of wallpapers?: ')
+    # currently not working
+    # just hit enter for now
     if len(subreddit) < 1 : subreddit = 'wallpapers';
     if subreddit == 'anime':
         url = 'https://www.reddit.com/r/Animewallpaper/top/.json?sort=top'
