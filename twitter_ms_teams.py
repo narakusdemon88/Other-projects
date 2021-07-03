@@ -49,15 +49,11 @@ def create_api():
 	for tweet in tweets:
 
 		try:
-
 			# Create a URL for easy clicking within chat
 			# Twitter URLs follow this format- https://twitter.com/[USERNAME]/status/[TWEET ID]
 			url = str('https://twitter.com/' + tweet.user.screen_name + '/status/' + str(tweet.id))
-
 			myTeamsMessage = pymsteams.connectorcard(OUTLOOK_WEBHOOK)
-
 			myTeamsMessage.addLinkButton(url, url)
-
 			myTeamsMessage.text(
 				# Create format of text message
 				'Username: ' + tweet.user.name + '\n' + '\n' +
