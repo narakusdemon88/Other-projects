@@ -54,20 +54,14 @@ def extract_data():
 
   logging.log('Query extracted successfully')
 
-  # df = pd.DataFrame({'name': ['Raphael', 'Donatello'],
-  #     'mask': ['red', 'purple'],
-  #     'weapon': ['sai', 'bo staff']})
-
-  # df.to_csv(today + '_report.csv', index=False)
 
 def send_mail():
 
   olMailItem = 0x0
   obj = win32com.client.Dispatch("Outlook.Application")
   newMail = obj.CreateItem(olMailItem)
-  newMail.Subject = "Fraud User Identification Daily report"
+  newMail.Subject = "Identification Daily report"
 
-  # newMail.To = "trv-QMO-FraudAnalysis@mail.rakuten.com"
   newMail.To = 'RECEIVERS_EMAIL@EMAIL.COM'
   attachment = 'PATH' + today + '_report.csv'
 
