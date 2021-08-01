@@ -36,7 +36,7 @@ class Weather:
         if description == "clear sky":
             description = "clear skies"
 
-        return f"Right now the weather in {self.city_name} is {celsius_weather}c with {description}.\n" \
+        return f"Right now the weather in {self.city_name.title()} is {celsius_weather}c with {description}.\n" \
                f"The weather in Fahrenheit is {fahrenheit_weather}f, and the humidity is {humidity}%."
 
 
