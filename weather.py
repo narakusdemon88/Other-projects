@@ -4,13 +4,16 @@ Built on 7/31/2021 using Python 3.9
 """
 
 import requests
+import ctypes
+import locale
+import os
 
 
 class Weather:
     def __init__(self, city_name):
         self.city_name = city_name
         # An API can be obtained by creating a free account at https://openweathermap.org/
-        self.api_key = "API ID GOES HERE"
+        self.api_key = os.environ.get("WEATHER_API_KEY")
 
     def kelvin_to_celsius(self, kelvin_temp):
         return int(kelvin_temp - 273.15)
@@ -36,15 +39,28 @@ class Weather:
         if description == "clear sky":
             description = "clear skies"
 
-        return f"Right now the weather in {self.city_name.title()} is {celsius_weather}c with {description}.\n" \
+        if users_language == "ja_JP":
+            return f"ただいま {self.city_name.title()} の気温は {celsius_weather}度でしょう。\n" \
+                   f"華氏は{fahrenheit_weather}fです。湿度は{humidity}%です。"
+        else:
+            return f"Right now the weather in {self.city_name.title()} is {celsius_weather}c with {description}.\n" \
                f"The weather in Fahrenheit is {fahrenheit_weather}f, and the humidity is {humidity}%."
 
 
 if __name__ == "__main__":
+    locale.getdefaultlocale()
+    windll = ctypes.windll.kernel32
+    windll.GetUserDefaultUILanguage()
+    users_language = locale.windows_locale[windll.GetUserDefaultUILanguage()]
+
     while True:
 
-        print("Welcome to the Akashi Weather APP (AWA)!")
-        city_name = input("Please input a city or press 'Exit' to exit: ")
+        if users_language == "ja_JP":
+            print("ようこそ、赤司の天気予報アプリへ！")
+            city_name = input("都市名を入力してくださ。終了希望の場合は'Exit'を入力してください：")
+        else:
+            print("Welcome to the Akashi Weather APP (AWA)!")
+            city_name = input("Please input a city or press 'Exit' to exit: ")
         if city_name == "Exit" or city_name == "exit":
             break
         else:
