@@ -54,17 +54,25 @@ if __name__ == "__main__":
     windll = ctypes.windll.kernel32
     windll.GetUserDefaultUILanguage()
     users_language = locale.windows_locale[windll.GetUserDefaultUILanguage()]
+    # users_language = "en_EN"
 
     while True:
-
-        if users_language == "ja_JP":
-            print("ようこそ、赤司の天気予報アプリへ！")
-            city_name = input("都市名を入力してくださ。終了希望の場合は'Exit'を入力してください：")
-        else:
-            print("Welcome to the Akashi Weather APP (AWA)!")
-            city_name = input("Please input a city or press 'Exit' to exit: ")
-        if city_name == "Exit" or city_name == "exit":
-            break
-        else:
-            weather_results = Weather(city_name)
-            print("\n" + weather_results.display_weather_data() + "\n")
+        try:
+            if users_language == "ja_JP":
+                print("ようこそ、赤司の天気予報アプリへ！")
+                city_name = input("都市名を入力してくださ。終了希望の場合は'Exit'を入力してください：")
+            else:
+                print("Welcome to the Akashi Weather APP (AWA)!")
+                city_name = input("Please input a city or press 'Exit' to exit: ")
+            if city_name == "Exit" or city_name == "exit":
+                break
+            else:
+                weather_results = Weather(city_name)
+                print("\n" + weather_results.display_weather_data() + "\n")
+        except KeyError:
+            if users_language == "ja_JP":
+                print("入力された都市名は誤りがあります。お手数ですが、もう一度入力してください。")
+                continue
+            else:
+                print("Invalid input")
+                continue
