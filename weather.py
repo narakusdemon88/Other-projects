@@ -10,15 +10,17 @@ import os
 
 
 class Weather:
-    def __init__(self, city_name):
-        self.city_name = city_name
+    def __init__(self, input_city_name):
+        self.city_name = input_city_name
         # An API can be obtained by creating a free account at https://openweathermap.org/
         self.api_key = os.environ.get("WEATHER_API_KEY")
 
-    def kelvin_to_celsius(self, kelvin_temp):
+    @staticmethod
+    def kelvin_to_celsius(kelvin_temp):
         return int(kelvin_temp - 273.15)
 
-    def kelvin_to_fahreneheit(self, kelvin_temp):
+    @staticmethod
+    def kelvin_to_fahrenheit(kelvin_temp):
         celsius_temp = kelvin_temp - 273.15
         return int(celsius_temp * (9 / 5) + 32)
 
@@ -34,7 +36,7 @@ class Weather:
         humidity = weather_data['main']['humidity']
 
         celsius_weather = self.kelvin_to_celsius(kelvin_temp)
-        fahrenheit_weather = self.kelvin_to_fahreneheit(kelvin_temp)
+        fahrenheit_weather = self.kelvin_to_fahrenheit(kelvin_temp)
 
         if description == "clear sky":
             description = "clear skies"
